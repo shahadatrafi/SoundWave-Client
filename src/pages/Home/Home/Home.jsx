@@ -1,4 +1,5 @@
 import Classes from "../Classes/Classes";
+import Instructors from "../Instructors/Instructors";
 import Slider from "../Slider/Slider";
 
 
@@ -7,6 +8,7 @@ const Home = () => {
         <div>
             <Slider></Slider>
             <Classes></Classes>
+            <Instructors></Instructors>
         </div>
     );
 };

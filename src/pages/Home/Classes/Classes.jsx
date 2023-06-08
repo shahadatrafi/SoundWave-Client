@@ -14,7 +14,7 @@ const Classes = () => {
     return (
         <div className="container mx-auto mb-28">
             <SectionTitle
-                heading={"popular Classes"}
+                heading={"our popular Classes"}
                 subheading={"In-Demand Course Offerings"}
             ></SectionTitle>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
