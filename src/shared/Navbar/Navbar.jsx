@@ -7,7 +7,7 @@ const Navbar = () => {
         <li><NavLink to="/" className="nav-link text-cyan-300 hover:text-cyan-500 active:text-cyan-500">Home</NavLink></li>
         <li><NavLink className="nav-link text-cyan-300 hover:text-cyan-500  active:text-cyan-500">Instructors</NavLink></li>
         <li><NavLink className="nav-link text-cyan-300 hover:text-cyan-500  active:text-cyan-500">Classes</NavLink></li>
-        <li><NavLink className="nav-link text-cyan-300 hover:text-cyan-500  active:text-cyan-500">Dashbord</NavLink></li>
+        <li><NavLink className="nav-link text-cyan-300 hover:text-cyan-500  active:text-cyan-500">Dashboard</NavLink></li>
     </>
 
     return (
@@ -25,7 +25,7 @@ const Navbar = () => {
                 </div>
                 <a className="normal-case text-2xl font-semibold text-white">Sound <span className="text-cyan-300">Wave</span></a>
             </div>
-            <div className="navbar-center hidden lg:flex">
+            <div className="navbar-start hidden lg:flex">
                 <ul className="menu menu-horizontal px-1">
 
                     {navigation}

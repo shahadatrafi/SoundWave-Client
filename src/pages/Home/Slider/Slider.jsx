@@ -9,7 +9,7 @@ import banner3 from "../../../assets/Slider-Img/banner-3.jpg"
 
 const Slider = () => {
     return (
-        <div>
+        <div className="mb-28">
             <Swiper
                 loop={true}
                 pagination={{
