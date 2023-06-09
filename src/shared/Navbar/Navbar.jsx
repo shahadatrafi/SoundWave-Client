@@ -1,13 +1,22 @@
 import { Link, NavLink } from "react-router-dom";
 import './Navbar.css'
+import { useContext } from "react";
+import { AuthContext } from "../../Providers/AuthProvider/AuthProvider";
+import { FaUserAlt } from "react-icons/fa";
 
 const Navbar = () => {
+
+    const { user, logout } = useContext(AuthContext);
+
+    const handleLogout = () => {
+        logout();
+    }
 
     const navigation = <>
         <li><NavLink to="/" className="nav-link text-cyan-300 hover:text-cyan-500 active:text-cyan-500">Home</NavLink></li>
         <li><NavLink className="nav-link text-cyan-300 hover:text-cyan-500  active:text-cyan-500">Instructors</NavLink></li>
         <li><NavLink className="nav-link text-cyan-300 hover:text-cyan-500  active:text-cyan-500">Classes</NavLink></li>
-        <li><NavLink className="nav-link text-cyan-300 hover:text-cyan-500  active:text-cyan-500">Dashboard</NavLink></li>
+        {user && <li><NavLink className="nav-link text-cyan-300 hover:text-cyan-500  active:text-cyan-500">Dashboard</NavLink></li>}
     </>
 
     return (
@@ -33,7 +42,13 @@ const Navbar = () => {
                 </ul>
             </div>
             <div className="navbar-end">
-                <Link to='/login' className="btn text-cyan-300 hover:bg-cyan-500 border-2 hover:border-cyan-500 btn-outline norma">Login</Link>
+                {user ?
+                    <><div className="w-12 mask mask-squircle mr-5">
+                        {user.photoURL && <img src={user.photoURL} />}
+                            </div>
+                        <Link onClick={handleLogout} className="btn text-cyan-300 hover:bg-cyan-500 border-2 hover:border-cyan-500 btn-outline norma">Log out</Link>
+                    </> :
+                    <Link to='/login' className="btn text-cyan-300 hover:bg-cyan-500 border-2 hover:border-cyan-500 btn-outline norma">Login</Link>}
             </div>
         </div>
     );
