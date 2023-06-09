@@ -3,10 +3,13 @@ import { useForm } from "react-hook-form";
 import SectionTitle from "../../components/SectionTitle";
 import { Link } from "react-router-dom";
 import SocialLogin from "../../components/SocialLogin";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { AuthContext } from "../../Providers/AuthProvider/AuthProvider";
 
 
 const SignUp = () => {
+
+    const { createUser } = useContext(AuthContext);
 
     const [error, setError] = useState('');
 
@@ -16,10 +19,19 @@ const SignUp = () => {
         const confirmPassword = data.confirmPassword
 
         if (password !== confirmPassword) {
-            return setError("Password and confirm password don't matvh")
+            return setError("Password and confirm password don't match")
         }
         setError('')
         console.log(data);
+        createUser(data.email, data.password)
+            
+            .then(res => {
+                const loggedUser = res.user;
+                console.log(loggedUser);
+            })
+            .catch(err => {
+            console.error(err.message)
+        })
 
     };
 

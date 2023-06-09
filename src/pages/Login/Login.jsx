@@ -2,13 +2,24 @@ import { Link } from "react-router-dom";
 import SectionTitle from "../../components/SectionTitle";
 import { useForm } from "react-hook-form";
 import SocialLogin from "../../components/SocialLogin";
+import { useContext } from "react";
+import { AuthContext } from "../../Providers/AuthProvider/AuthProvider";
 
 
 const Login = () => {
 
+    const { loginUser } = useContext(AuthContext);
+
     const { register, handleSubmit, formState:{ errors } } = useForm();
     const onSubmit = (data) => {
-        console.log(data)
+        loginUser(data.email, data.password)
+            .then(res => {
+                const loggedInUser = res.user;
+                console.log(loggedInUser);
+            })
+            .catch(err => {
+            console.err(err.message)
+        })
     }
 
     return (
