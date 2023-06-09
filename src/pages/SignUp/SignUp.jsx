@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import SocialLogin from "../../components/SocialLogin";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../Providers/AuthProvider/AuthProvider";
+import { updateProfile } from "firebase/auth";
 
 
 const SignUp = () => {
@@ -28,6 +29,12 @@ const SignUp = () => {
             .then(res => {
                 const loggedUser = res.user;
                 console.log(loggedUser);
+                updateProfile(loggedUser, {
+                    displayName: data.name, photoURL: data.photoURL
+                })
+                    .then(() => {
+                    console.log('Profile Updated')
+                }).catch(err => console.error(err.message))
             })
             .catch(err => {
             console.error(err.message)
@@ -56,6 +63,8 @@ const SignUp = () => {
                 {errors.confirmPassword && <p className="text-red-500">Type Your Password here again</p>}
                 {error && <p className="text-red-500">{error}</p>
                 }
+                <div><input className="input input-bordered border-info w-full mb-3 max-w-xs" {...register("photoURL", { required: true })} placeholder="Paste Your Photo URL" /></div>
+                {errors.name && <p className="text-red-500">Photo is required</p>}
                 <div><input className="btn btn-info w-full max-w-xs mt-6" type="submit" value='sign up' /></div>
             </form>
             <p className="mt-6"> Already have an account ? Please <Link to='/login' className="text-cyan-400 font-semibold">Login</Link> Here</p>
