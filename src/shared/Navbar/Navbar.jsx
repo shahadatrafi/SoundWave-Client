@@ -13,7 +13,7 @@ const Navbar = () => {
 
     const navigation = <>
         <li><NavLink to="/" className="nav-link text-cyan-300 hover:text-cyan-500 active:text-cyan-500">Home</NavLink></li>
-        <li><NavLink className="nav-link text-cyan-300 hover:text-cyan-500  active:text-cyan-500">Instructors</NavLink></li>
+        <li><NavLink to='/instructors' className="nav-link text-cyan-300 hover:text-cyan-500  active:text-cyan-500">Instructors</NavLink></li>
         <li><NavLink to='/classes' className="nav-link text-cyan-300 hover:text-cyan-500  active:text-cyan-500">Classes</NavLink></li>
         {user && <li><NavLink className="nav-link text-cyan-300 hover:text-cyan-500  active:text-cyan-500">Dashboard</NavLink></li>}
     </>

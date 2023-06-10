@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
 
 
@@ -8,10 +7,6 @@ const ApprovedClassCard = ({ApprovedClass}) => {
 
     
     const setLeft = availableSeats - students;
-
-    // if (setLeft === 0) {
-    //    return setDisable(true)
-    // }
 
     return (
         <div className={`card w-full glass ${setLeft === 0 ? 'bg-red-700 opacity-80' : ''}`}>
