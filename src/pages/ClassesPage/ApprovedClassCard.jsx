@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Providers/AuthProvider/AuthProvider";
 import Swal from "sweetalert2";
+import useCart from "../../hooks/useCart";
 
 
 const ApprovedClassCard = ({ ApprovedClass }) => {
@@ -9,6 +10,7 @@ const ApprovedClassCard = ({ ApprovedClass }) => {
     const { user } = useContext(AuthContext);
     const navigate = useNavigate();
     const location = useLocation();
+    const [, refetch] = useCart();
 
     const { image, name, instructorName, availableSeats, students, price, _id } = ApprovedClass;
 
@@ -30,6 +32,7 @@ const ApprovedClassCard = ({ ApprovedClass }) => {
                 .then(res => res.json())
                 .then(data => {
                     if (data.insertedId) {
+                        refetch();
                         Swal.fire({
                             position: 'top-end',
                             icon: 'success',
