@@ -2,6 +2,7 @@ import { Link, NavLink } from "react-router-dom";
 import './Navbar.css'
 import { useContext } from "react";
 import { AuthContext } from "../../Providers/AuthProvider/AuthProvider";
+import { FaShoppingCart } from "react-icons/fa";
 
 const Navbar = () => {
 
@@ -42,10 +43,20 @@ const Navbar = () => {
             </div>
             <div className="navbar-end">
                 {user ?
-                    <><div className="w-12 mask mask-squircle mr-5">
-                        {user.photoURL && <img src={user.photoURL} />}
-                            </div>
+                    <>
+                        <div className="indicator mr-4">
+                            <Link to='/'>
+                                <span className="indicator-item font-semibold badge badge-info">0</span>
+                                <FaShoppingCart className="text-2xl"></FaShoppingCart>
+                            </Link>
+                        </div>
+
+                        <div className="w-12 mask mask-squircle mr-5">
+                            {user.photoURL && <img src={user.photoURL} />}
+                        </div>
+                        
                         <Link onClick={handleLogout} className="btn text-cyan-300 hover:bg-cyan-500 border-2 hover:border-cyan-500 btn-outline norma">Log out</Link>
+                        
                     </> :
                     <Link to='/login' className="btn text-cyan-300 hover:bg-cyan-500 border-2 hover:border-cyan-500 btn-outline norma">Login</Link>}
             </div>
