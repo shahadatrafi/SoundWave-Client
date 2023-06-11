@@ -1,9 +1,44 @@
-import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../Providers/AuthProvider/AuthProvider";
+import Swal from "sweetalert2";
 
 
-const ApprovedClassCard = ({ApprovedClass}) => {
+const ApprovedClassCard = ({ ApprovedClass }) => {
+    
+    const { user } = useContext(AuthContext);
+    const navigate = useNavigate();
 
-    const { image, name, instructorName, availableSeats, students, price, _id, } = ApprovedClass;
+    const { image, name, instructorName, availableSeats, students, price, } = ApprovedClass;
+
+    const handleSelectClass = (approvedClass) => {
+
+        if (user) {
+            fetch('http://localhost:5000/carts', {
+                method: 'POST',
+                headers: {
+                    'content-type':'application/json'
+                },
+                body: JSON.stringify(approvedClass)
+            })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.insertedId) {
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: 'success',
+                            title: 'Your class has been added',
+                            showConfirmButton: false,
+                            timer: 1500
+                          })
+                }
+                })
+        }
+        else {
+            navigate('login')
+        }
+        
+}
 
     
     const setLeft = availableSeats - students;
@@ -20,7 +55,7 @@ const ApprovedClassCard = ({ApprovedClass}) => {
                 <div className="flex w-full items-center justify-between">
                 <p><span className="font-semibold text-white opacity-80">Available Sets:</span> <span className="text-cyan-400 ">{setLeft}</span></p>
                 </div>
-                <button disabled={setLeft === 0 ? true : false} className="btn btn-outline btn-info btn-block mt-3"><Link to={`/classes/${_id}`}>Select Course</Link></button>
+                <button onClick={()=> handleSelectClass(ApprovedClass)} disabled={setLeft === 0 ? true : false} className="btn btn-outline btn-info btn-block mt-3"><Link>Select Course</Link></button>
             </div>
         </div>
     );
