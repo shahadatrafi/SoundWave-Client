@@ -10,6 +10,7 @@ import ClassesPage from "../pages/ClassesPage/ClassesPage";
 import InstructorsPage from "../pages/InstructorsPage/InstructorsPage";
 import Dashboard from "../layouts/Dashboard";
 import MyCart from "../pages/Dashboard/Mycart/MyCart";
+import MyEnrolledClasses from "../pages/Dashboard/Mycart/MyEnrolledClasses/MyEnrolledClasses";
 
 const router = createBrowserRouter([
   {
@@ -45,6 +46,10 @@ const router = createBrowserRouter([
       {
         path: 'mycart',
         element: <MyCart></MyCart>
+      },
+      {
+        path: 'enrolledclass',
+        element: <MyEnrolledClasses></MyEnrolledClasses>
       }
     ]
   }

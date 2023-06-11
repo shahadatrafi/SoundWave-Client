@@ -5,3 +5,8 @@
 :root{
  --primary-color: aqua;
 }
+
+.drawer-side a.active {
+    color: black;
+    background-color: aqua;
+}

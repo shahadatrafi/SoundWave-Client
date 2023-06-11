@@ -1,4 +1,4 @@
-import { Outlet } from "react-router-dom";
+import { NavLink, Outlet } from "react-router-dom";
 
 
 const Dashboard = () => {
@@ -14,8 +14,8 @@ const Dashboard = () => {
                 <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
                 <ul className="menu p-4 w-80 h-full bg-base-200 text-base-content">
                     {/* Sidebar content here */}
-                    <li><a>Sidebar Item 1</a></li>
-                    <li><a>Sidebar Item 2</a></li>
+                    <li><NavLink className='my-1' to='/dashboard/mycart'>My Selected Classes</NavLink></li>
+                    <li><NavLink className='my-1' to='/dashboard/enrolledclass'>My Enrolled Classes:</NavLink></li>
                 </ul>
 
             </div>
