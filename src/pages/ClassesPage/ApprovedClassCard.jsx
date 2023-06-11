@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Providers/AuthProvider/AuthProvider";
 import Swal from "sweetalert2";
 
@@ -8,18 +8,24 @@ const ApprovedClassCard = ({ ApprovedClass }) => {
     
     const { user } = useContext(AuthContext);
     const navigate = useNavigate();
+    const location = useLocation();
 
-    const { image, name, instructorName, availableSeats, students, price, } = ApprovedClass;
+    const { image, name, instructorName, availableSeats, students, price, _id } = ApprovedClass;
 
     const handleSelectClass = (approvedClass) => {
 
         if (user) {
+
+            console.log(approvedClass);
+
+            const selectedClass = {classId: _id, name, image, instructorName, price, email: user.email}
+
             fetch('http://localhost:5000/carts', {
                 method: 'POST',
                 headers: {
                     'content-type':'application/json'
                 },
-                body: JSON.stringify(approvedClass)
+                body: JSON.stringify(selectedClass)
             })
                 .then(res => res.json())
                 .then(data => {
@@ -35,7 +41,7 @@ const ApprovedClassCard = ({ ApprovedClass }) => {
                 })
         }
         else {
-            navigate('login')
+            navigate('/login', {state: {from: location}})
         }
         
 }
