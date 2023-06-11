@@ -9,7 +9,8 @@ import SignUp from "../pages/SignUp/SignUp";
 import ClassesPage from "../pages/ClassesPage/ClassesPage";
 import InstructorsPage from "../pages/InstructorsPage/InstructorsPage";
 import PrivateRoute from "./PrivateRoute";
-import Dashboard from "../pages/Dashboard/Dashbord/Dashboard";
+import Dashboard from "../layouts/Dashboard";
+import MyCart from "../pages/Dashboard/Mycart/MyCart";
 
 const router = createBrowserRouter([
   {
@@ -37,9 +38,16 @@ const router = createBrowserRouter([
         element: <InstructorsPage></InstructorsPage>
       }
     ]
-  }, {
+  },
+  {
     path: 'dashboard',
-    element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>
+    element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
+    children: [
+      {
+        path: 'mycart',
+        element: <MyCart></MyCart>
+      }
+    ]
   }
 ]);
 
