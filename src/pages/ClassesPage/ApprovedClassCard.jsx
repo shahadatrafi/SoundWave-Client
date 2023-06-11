@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import {useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Providers/AuthProvider/AuthProvider";
 import Swal from "sweetalert2";
 import useCart from "../../hooks/useCart";
@@ -64,7 +64,7 @@ const ApprovedClassCard = ({ ApprovedClass }) => {
                 <div className="flex w-full items-center justify-between">
                 <p><span className="font-semibold text-white opacity-80">Available Sets:</span> <span className="text-cyan-400 ">{setLeft}</span></p>
                 </div>
-                <button onClick={()=> handleSelectClass(ApprovedClass)} disabled={setLeft === 0 ? true : false} className="btn btn-outline btn-info btn-block mt-3"><Link>Select Course</Link></button>
+                <button onClick={()=> handleSelectClass(ApprovedClass)} disabled={setLeft === 0 ? true : false} className="btn btn-outline btn-info btn-block mt-3">Select Course</button>
             </div>
         </div>
     );

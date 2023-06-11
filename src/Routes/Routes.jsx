@@ -10,7 +10,7 @@ import ClassesPage from "../pages/ClassesPage/ClassesPage";
 import InstructorsPage from "../pages/InstructorsPage/InstructorsPage";
 import Dashboard from "../layouts/Dashboard";
 import MyCart from "../pages/Dashboard/Mycart/MyCart";
-import MyEnrolledClasses from "../pages/Dashboard/Mycart/MyEnrolledClasses/MyEnrolledClasses";
+import MyEnrolledClasses from "../pages/Dashboard/MyEnrolledClasses/MyEnrolledClasses";
 
 const router = createBrowserRouter([
   {
