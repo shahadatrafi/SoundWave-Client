@@ -10,3 +10,7 @@
     color: black;
     background-color: aqua;
 }
+.menu-horizontal a.active {
+    color: black;
+    background-color: aqua;
+}

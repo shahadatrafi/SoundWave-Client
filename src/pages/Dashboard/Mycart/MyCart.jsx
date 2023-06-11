@@ -1,10 +1,41 @@
+import Swal from "sweetalert2";
 import SectionTitle from "../../../components/SectionTitle";
 import useCart from "../../../hooks/useCart";
 
 
 const MyCart = () => {
 
-    const [cart] = useCart();
+    const [cart, refetch] = useCart();
+    
+    const handleDelete = id => {
+        
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+          }).then((result) => {
+            if (result.isConfirmed) {
+                fetch(`http://localhost:5000/carts/${id}`, {
+                    method: 'DELETE'
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.deletedCount) {
+                            refetch();
+                            Swal.fire(
+                                'Deleted!',
+                                'Your file has been deleted.',
+                                'success'
+                              )
+                    }
+                })
+            }
+          })
+    }
 
     return (
         <div className="w-10/12 mx-auto">
@@ -28,28 +59,28 @@ const MyCart = () => {
                     </thead>
                     <tbody>
                         {
-                            cart.map((selectedclass, index) => <tr
-                                key={selectedclass._id}
+                            cart.map((selectedClass, index) => <tr
+                                key={selectedClass._id}
                             >
                                 <th>
                                     <p>{index + 1}</p>
                                 </th>
                                 <td className="font-bold">
-                                    {selectedclass.name}
+                                    {selectedClass.name}
                                 </td>
                                 <td>
                                     <div className="avatar">
                                         <div className="mask mask-squircle w-12 h-12">
-                                            <img src={selectedclass.image} alt="Avatar Tailwind CSS Component" />
+                                            <img src={selectedClass.image} alt="Avatar Tailwind CSS Component" />
                                         </div>
                                     </div>
                                 </td>
-                                <td> $ {selectedclass.price}</td>
+                                <td> $ {selectedClass.price}</td>
                                 <th>
                                 <button className="btn btn-outline btn-info btn-block btn-sm">Pay</button>
                                 </th>
                                 <th>
-                                <button className="btn btn-outline btn-info btn-block btn-sm">Delete</button>
+                                <button onClick={()=>handleDelete(selectedClass._id)} className="btn btn-outline btn-info btn-block btn-sm">Delete</button>
                                 </th>
                             </tr>)
                         }
