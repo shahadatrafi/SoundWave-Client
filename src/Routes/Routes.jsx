@@ -54,7 +54,7 @@ const router = createBrowserRouter([
         element: <MyEnrolledClasses></MyEnrolledClasses>
       },
       {
-        path: 'alluser',
+        path: 'allusers',
         element: <AllUsers></AllUsers>
       },
       {
