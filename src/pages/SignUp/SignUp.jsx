@@ -1,16 +1,18 @@
 /* eslint-disable no-undef */
 import { useForm } from "react-hook-form";
 import SectionTitle from "../../components/SectionTitle";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import SocialLogin from "../../components/SocialLogin";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../Providers/AuthProvider/AuthProvider";
 import { updateProfile } from "firebase/auth";
+import Swal from "sweetalert2";
 
 
 const SignUp = () => {
 
     const { createUser } = useContext(AuthContext);
+    const navigate = useNavigate();
 
     const [error, setError] = useState('');
 
@@ -33,6 +35,38 @@ const SignUp = () => {
                     displayName: data.name, photoURL: data.photoURL
                 })
                     .then(() => {
+
+                        const savedUser = {name: data.name, email: data.email, role: 'student'}
+
+                        fetch(`http://localhost:5000/users`, {
+                            method: 'POST',
+                            headers: {
+                                'content-type': 'application/json'
+                            },
+                            body: JSON.stringify(savedUser)
+                        })
+                            .then(res => res.json())
+                            .then(data => {
+                                if (data.insertedId) {
+                                    navigate('/')
+                                    const Toast = Swal.mixin({
+                                        toast: true,
+                                        position: 'top-end',
+                                        showConfirmButton: false,
+                                        timer: 3000,
+                                        timerProgressBar: true,
+                                        didOpen: (toast) => {
+                                          toast.addEventListener('mouseenter', Swal.stopTimer)
+                                          toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                        }
+                                      })
+                                      
+                                      Toast.fire({
+                                        icon: 'success',
+                                        title: 'Signed Up successfully'
+                                      })
+                        }
+                    })    
                     console.log('Profile Updated')
                 }).catch(err => console.error(err.message))
             })
