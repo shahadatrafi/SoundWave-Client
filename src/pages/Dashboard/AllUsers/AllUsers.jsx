@@ -1,13 +1,70 @@
 import { FaUserGraduate, FaUserShield } from "react-icons/fa";
 import SectionTitle from "../../../components/SectionTitle";
 import { useQuery } from "@tanstack/react-query";
+import Swal from "sweetalert2";
 
 const AllUsers = () => {
 
     const { data: users = [], refetch } = useQuery(['users'], async () => {
         const res = await fetch('http://localhost:5000/users')
         return res.json();
-    })
+    });
+
+    const handleMakeInstructor = user => {
+
+        Swal.fire({
+            title: 'Are you sure?',
+            text: `${user.name} will be a Instructor...!`,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                fetch(`http://localhost:5000/users/${user._id}`, {
+                    method: 'PUT'
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.modifiedCount) {
+                            refetch();
+                            const newInstructor = { name: user.name, image: user.image, email: user.email, role: 'instructor' }
+                            fetch(`http://localhost:5000/instructors`, {
+                                method: 'POST',
+                                headers: {
+                                    'content-type': 'application/json'
+                                },
+                                body: JSON.stringify(newInstructor)
+                            })
+
+                                .then(res => res.json())
+                                .then(data => {
+                                    if (data.insertedId) {
+                                        refetch();
+                                        const Toast = Swal.mixin({
+                                            toast: true,
+                                            position: 'top-end',
+                                            showConfirmButton: false,
+                                            timer: 3000,
+                                            timerProgressBar: true,
+                                            didOpen: (toast) => {
+                                                toast.addEventListener('mouseenter', Swal.stopTimer)
+                                                toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                            }
+                                        })
+
+                                        Toast.fire({
+                                            icon: 'success',
+                                            title: `${user.name} is now Instructor`
+                                        })
+                                    }
+                                })
+                        }
+                    })
+            }
+        })
+    }
 
     return (
         <div className="w-10/12 mx-auto">
@@ -45,7 +102,7 @@ const AllUsers = () => {
                                 <td> $ {user.role}</td>
                                 <th>
                                     <div className="flex gap-4 justify-center">
-                                        <button className="btn btn-outline btn-info btn-sm text-xl "><FaUserGraduate></FaUserGraduate></button>
+                                        <button onClick={() => handleMakeInstructor(user)} className="btn btn-outline btn-info btn-sm text-xl "><FaUserGraduate></FaUserGraduate></button>
                                         <button className="btn btn-outline btn-info btn-sm text-xl "><FaUserShield></FaUserShield></button>
                                     </div>
                                 </th>
