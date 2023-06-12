@@ -28,6 +28,22 @@ const AllUsers = () => {
                     .then(res => res.json())
                     .then(data => {
                         if (data.modifiedCount) {
+                            const Toast = Swal.mixin({
+                                toast: true,
+                                position: 'top-end',
+                                showConfirmButton: false,
+                                timer: 3000,
+                                timerProgressBar: true,
+                                didOpen: (toast) => {
+                                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                }
+                            })
+
+                            Toast.fire({
+                                icon: 'success',
+                                title: `${user.name} is now Instructor`
+                            })
                             refetch();
                             const newInstructor = { name: user.name, image: user.image, email: user.email, role: 'instructor' }
                             fetch(`http://localhost:5000/instructors`, {
@@ -42,22 +58,7 @@ const AllUsers = () => {
                                 .then(data => {
                                     if (data.insertedId) {
                                         refetch();
-                                        const Toast = Swal.mixin({
-                                            toast: true,
-                                            position: 'top-end',
-                                            showConfirmButton: false,
-                                            timer: 3000,
-                                            timerProgressBar: true,
-                                            didOpen: (toast) => {
-                                                toast.addEventListener('mouseenter', Swal.stopTimer)
-                                                toast.addEventListener('mouseleave', Swal.resumeTimer)
-                                            }
-                                        })
-
-                                        Toast.fire({
-                                            icon: 'success',
-                                            title: `${user.name} is now Instructor`
-                                        })
+                                        
                                     }
                                 })
                         }
@@ -65,6 +66,48 @@ const AllUsers = () => {
             }
         })
     }
+
+    const handleMakeAdmin = user => {
+
+        Swal.fire({
+            title: 'Are you sure?',
+            text: `${user.name} will be a Admin...!`,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                fetch(`http://localhost:5000/users/${user._id}`, {
+                    method: 'PATCH'
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.modifiedCount) {
+                            refetch();
+                            const Toast = Swal.mixin({
+                                toast: true,
+                                position: 'top-end',
+                                showConfirmButton: false,
+                                timer: 3000,
+                                timerProgressBar: true,
+                                didOpen: (toast) => {
+                                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                }
+                            })
+
+                            Toast.fire({
+                                icon: 'success',
+                                title: `${user.name} is now Admin`
+                            })
+                        }
+                    })
+            }
+        })
+    }
+
 
     return (
         <div className="w-10/12 mx-auto">
@@ -102,8 +145,8 @@ const AllUsers = () => {
                                 <td> $ {user.role}</td>
                                 <th>
                                     <div className="flex gap-4 justify-center">
-                                        <button onClick={() => handleMakeInstructor(user)} className="btn btn-outline btn-info btn-sm text-xl "><FaUserGraduate></FaUserGraduate></button>
-                                        <button className="btn btn-outline btn-info btn-sm text-xl "><FaUserShield></FaUserShield></button>
+                                        <button disabled={user.role === 'instructor'} onClick={() => handleMakeInstructor(user)} className="btn btn-outline btn-info btn-sm text-xl "><FaUserGraduate></FaUserGraduate></button>
+                                        <button disabled={user.role === 'admin'} onClick={() => handleMakeAdmin(user)} className="btn btn-outline btn-info btn-sm text-xl "><FaUserShield></FaUserShield></button>
                                     </div>
                                 </th>
                             </tr>)
