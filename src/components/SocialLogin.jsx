@@ -27,8 +27,9 @@ const SocialLogin = () => {
                 })
                     .then(res => res.json())
                     .then(data => {
+                        navigate('/')
                         if (data.insertedId) {
-                            navigate('/')
+                            
                             const Toast = Swal.mixin({
                                 toast: true,
                                 position: 'top-end',

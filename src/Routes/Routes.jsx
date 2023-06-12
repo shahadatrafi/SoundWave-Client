@@ -11,6 +11,8 @@ import InstructorsPage from "../pages/InstructorsPage/InstructorsPage";
 import Dashboard from "../layouts/Dashboard";
 import MyCart from "../pages/Dashboard/Mycart/MyCart";
 import MyEnrolledClasses from "../pages/Dashboard/MyEnrolledClasses/MyEnrolledClasses";
+import AllUsers from "../pages/Dashboard/AllUsers/AllUsers";
+import AllClasses from "../pages/Dashboard/AllClasses/AllClasses";
 
 const router = createBrowserRouter([
   {
@@ -50,6 +52,14 @@ const router = createBrowserRouter([
       {
         path: 'enrolledclass',
         element: <MyEnrolledClasses></MyEnrolledClasses>
+      },
+      {
+        path: 'alluser',
+        element: <AllUsers></AllUsers>
+      },
+      {
+        path: 'allclasses',
+        element: <AllClasses></AllClasses>
       }
     ]
   }
