@@ -14,6 +14,9 @@ import MyEnrolledClasses from "../pages/Dashboard/MyEnrolledClasses/MyEnrolledCl
 import AllUsers from "../pages/Dashboard/AllUsers/AllUsers";
 import AllClasses from "../pages/Dashboard/AllClasses/AllClasses";
 import PrivateRoute from "./PrivateRoute";
+import AdminRoute from "./AdminRoute";
+import AddClass from "../pages/Dashboard/AddClass/AddClass";
+import AddedClasses from "../pages/Dashboard/MyClasses/AddedClasses";
 
 const router = createBrowserRouter([
   {
@@ -56,11 +59,19 @@ const router = createBrowserRouter([
       },
       {
         path: 'allusers',
-        element: <AllUsers></AllUsers>
+        element: <AdminRoute><AllUsers></AllUsers></AdminRoute>
       },
       {
         path: 'allclasses',
-        element: <AllClasses></AllClasses>
+        element: <AdminRoute><AllClasses></AllClasses></AdminRoute>
+      },
+      {
+        path: 'addclass',
+        element: <AddClass></AddClass>
+      },
+      {
+        path: 'addedclasses',
+        element: <AddedClasses></AddedClasses>
       }
     ]
   }
