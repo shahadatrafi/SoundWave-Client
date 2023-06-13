@@ -14,6 +14,7 @@ const Navbar = () => {
         logout();
     }
 
+
     const navigation = <>
         <li><NavLink to="/" className="nav-link text-cyan-300 hover:text-cyan-500 active:text-cyan-500">Home</NavLink></li>
         <li><NavLink to='/instructors' className="nav-link text-cyan-300 hover:text-cyan-500  active:text-cyan-500">Instructors</NavLink></li>
@@ -52,6 +53,7 @@ const Navbar = () => {
                                 <FaShoppingCart className="text-2xl"></FaShoppingCart>
                             </Link>
                         </div>
+                        .
 
                         <div className="w-12 mask mask-squircle mr-5">
                             {user.photoURL && <img src={user.photoURL} />}

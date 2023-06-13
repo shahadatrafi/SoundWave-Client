@@ -13,6 +13,7 @@ import MyCart from "../pages/Dashboard/Mycart/MyCart";
 import MyEnrolledClasses from "../pages/Dashboard/MyEnrolledClasses/MyEnrolledClasses";
 import AllUsers from "../pages/Dashboard/AllUsers/AllUsers";
 import AllClasses from "../pages/Dashboard/AllClasses/AllClasses";
+import PrivateRoute from "./PrivateRoute";
 
 const router = createBrowserRouter([
   {
@@ -43,7 +44,7 @@ const router = createBrowserRouter([
   },
   {
     path: 'dashboard',
-    element: <Dashboard></Dashboard>,
+    element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
     children: [
       {
         path: 'mycart',
