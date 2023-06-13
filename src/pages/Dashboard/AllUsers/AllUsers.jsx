@@ -5,8 +5,14 @@ import Swal from "sweetalert2";
 
 const AllUsers = () => {
 
+    const token = localStorage.getItem('access-token');
+
     const { data: users = [], refetch } = useQuery(['users'], async () => {
-        const res = await fetch('http://localhost:5000/users')
+        const res = await fetch('http://localhost:5000/users', {
+            headers: {
+                authorization: `bearer ${token}`
+            }
+        })
         return res.json();
     });
 
@@ -142,7 +148,9 @@ const AllUsers = () => {
                                 <td>
                                     {user.email}
                                 </td>
-                                <td> $ {user.role}</td>
+                                <td>
+                                    {user.role}
+                                </td>
                                 <th>
                                     <div className="flex gap-4 justify-center">
                                         <button disabled={user.role === 'instructor'} onClick={() => handleMakeInstructor(user)} className="btn btn-outline btn-info btn-sm text-xl "><FaUserGraduate></FaUserGraduate></button>

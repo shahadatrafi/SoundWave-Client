@@ -1,15 +1,14 @@
 import { FaArrowLeft, FaCheckSquare, FaClipboardList, FaShoppingCart, FaUsers } from "react-icons/fa";
 import { NavLink, Outlet } from "react-router-dom";
-import useCart from "../hooks/useCart";
 import useAdmin from "../hooks/useAdmin";
 
 
 const Dashboard = () => {
 
-    const [cart] = useCart();
 
     // const isAdmin = true;
     const [isAdmin] = useAdmin();
+    console.log(isAdmin)
 
     return (
         <div className="drawer lg:drawer-open">
@@ -28,11 +27,11 @@ const Dashboard = () => {
 
                     {/* Sidebar content here */}
 
-                    {isAdmin ?
+                    {isAdmin?.admin ?
                         <>
                             <li>
                                 <NavLink className='my-1 text-cyan-300 hover:text-cyan-500' to='/dashboard/allusers'>
-                                   <FaUsers className="text-xl"></FaUsers> Manage Users
+                                    <FaUsers className="text-xl"></FaUsers> Manage Users
                                 </NavLink>
                             </li>
 
@@ -42,11 +41,8 @@ const Dashboard = () => {
                         <>
                             <li>
                                 <NavLink className='my-1 text-cyan-300 hover:text-cyan-500' to='/dashboard/mycart'>
-                                    <div className="indicator mr-4">
-
-                                        <span className="indicator-item font-semibold badge badge-info left-1">{cart?.length || 0}</span>
-                                        <FaShoppingCart className="text-xl mr-1"></FaShoppingCart>
-                                    </div>Selected Classes
+                                    <FaShoppingCart className="text-xl mr-1"></FaShoppingCart>
+                                    Selected Classes
                                 </NavLink>
                             </li>
 

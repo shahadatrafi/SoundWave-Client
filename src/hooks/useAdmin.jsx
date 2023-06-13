@@ -13,7 +13,7 @@ const useAdmin = () => {
                     authorization: `bearer ${token}`
                 }
             });
-            return res.data.admin
+            return res.json();
         }
     })
     return [isAdmin, isAdminLoading]
