@@ -1,4 +1,4 @@
-import { FaArrowLeft, FaCheckSquare, FaClipboardList, FaShoppingCart, FaUsers } from "react-icons/fa";
+import { FaArrowLeft, FaCalendarPlus, FaCheckSquare, FaClipboardList, FaShoppingCart, FaUsers } from "react-icons/fa";
 import { NavLink, Outlet } from "react-router-dom";
 import useAdmin from "../hooks/useAdmin";
 
@@ -6,7 +6,8 @@ import useAdmin from "../hooks/useAdmin";
 const Dashboard = () => {
 
 
-    // const isAdmin = true;
+    const isInstructor = true;
+    console.log(isInstructor)
     const [isAdmin] = useAdmin();
     console.log(isAdmin)
 
@@ -39,14 +40,28 @@ const Dashboard = () => {
                         </>
                         :
                         <>
-                            <li>
-                                <NavLink className='my-1 text-cyan-300 hover:text-cyan-500' to='/dashboard/mycart'>
-                                    <FaShoppingCart className="text-xl mr-1"></FaShoppingCart>
-                                    Selected Classes
-                                </NavLink>
-                            </li>
+                            {isInstructor ?
+                                <>
+                                    <li>
+                                        <NavLink className='my-1 text-cyan-300 hover:text-cyan-500' to='/dashboard/addclass'>
+                                            <FaCalendarPlus className="text-xl mr-1"></FaCalendarPlus>
+                                            Add A Class
+                                        </NavLink>
+                                    </li>
 
-                            <li><NavLink className='my-1 text-cyan-300 hover:text-cyan-500' to='/dashboard/enrolledclass'><FaCheckSquare className="text-xl"></FaCheckSquare> Enrolled Classes</NavLink></li>
+                                    <li><NavLink className='my-1 text-cyan-300 hover:text-cyan-500' to='/dashboard/addedclasses'><FaClipboardList className="text-xl"></FaClipboardList> My Classes</NavLink></li>
+                                </>
+                                :
+                                <>
+                                    <li>
+                                        <NavLink className='my-1 text-cyan-300 hover:text-cyan-500' to='/dashboard/mycart'>
+                                            <FaShoppingCart className="text-xl mr-1"></FaShoppingCart>
+                                            Selected Classes
+                                        </NavLink>
+                                    </li>
+
+                                    <li><NavLink className='my-1 text-cyan-300 hover:text-cyan-500' to='/dashboard/enrolledclass'><FaCheckSquare className="text-xl"></FaCheckSquare> Enrolled Classes</NavLink></li>
+                                </>}
                         </>}
 
                     {/* Go Back Home Button */}
