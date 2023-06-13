@@ -1,15 +1,11 @@
-import { useEffect, useState } from "react";
 import SectionTitle from "../../../components/SectionTitle";
 import ClassCard from "./ClassCard";
+import useClasses from "../../../hooks/useClasses";
 
 const Classes = () => {
 
-    const [classes, setClasses] = useState([]);
-    useEffect(() => {
-        fetch('http://localhost:5000/classes')
-            .then(res => res.json())
-        .then(data => setClasses(data))
-    },[])
+    const [classes] = useClasses();
+    const approvedClasses = classes.filter(c => c.status === 'approved');
 
     return (
         <div className="container mx-auto mb-28">
@@ -19,7 +15,7 @@ const Classes = () => {
             ></SectionTitle>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                 {
-                    classes.map(classItem => <ClassCard
+                    approvedClasses.map(classItem => <ClassCard
                         key={classItem._id}
                         classItem={classItem}
                     ></ClassCard>)
