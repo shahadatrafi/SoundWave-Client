@@ -1,12 +1,52 @@
 import { FaCheck } from "react-icons/fa";
 import SectionTitle from "../../../components/SectionTitle";
 import useClasses from "../../../hooks/useClasses";
+import Swal from "sweetalert2";
 
 const AllClasses = () => {
 
-    const [classes] = useClasses();
+    const [classes, refetch] = useClasses();
 
-    
+    const handleApproved = c => {
+
+        Swal.fire({
+            title: 'Are you sure?',
+            text: `${c.name} will be a approved...!`,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                fetch(`http://localhost:5000/classes/approved/${c._id}`, {
+                    method: 'PUT'
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.modifiedCount) {
+                            refetch();
+                            const Toast = Swal.mixin({
+                                toast: true,
+                                position: 'top-end',
+                                showConfirmButton: false,
+                                timer: 3000,
+                                timerProgressBar: true,
+                                didOpen: (toast) => {
+                                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                }
+                            })
+
+                            Toast.fire({
+                                icon: 'success',
+                                title: `${c.name} is now approved class`
+                            })
+                        }
+                    })
+            }
+        })
+    }
 
     return (
         <div className="w-full">
