@@ -1,13 +1,15 @@
 import { FaArrowLeft, FaCheckSquare, FaClipboardList, FaShoppingCart, FaUsers } from "react-icons/fa";
 import { NavLink, Outlet } from "react-router-dom";
 import useCart from "../hooks/useCart";
+import useAdmin from "../hooks/useAdmin";
 
 
 const Dashboard = () => {
 
     const [cart] = useCart();
 
-    const isAdmin = true;
+    // const isAdmin = true;
+    const [isAdmin] = useAdmin();
 
     return (
         <div className="drawer lg:drawer-open">
@@ -26,7 +28,7 @@ const Dashboard = () => {
 
                     {/* Sidebar content here */}
 
-                    {isAdmin===false ?
+                    {isAdmin ?
                         <>
                             <li>
                                 <NavLink className='my-1 text-cyan-300 hover:text-cyan-500' to='/dashboard/allusers'>

@@ -22,7 +22,7 @@ const AllUsers = () => {
             confirmButtonText: 'Yes'
         }).then((result) => {
             if (result.isConfirmed) {
-                fetch(`http://localhost:5000/users/${user._id}`, {
+                fetch(`http://localhost:5000/users/instructors/${user._id}`, {
                     method: 'PUT'
                 })
                     .then(res => res.json())
@@ -79,7 +79,7 @@ const AllUsers = () => {
             confirmButtonText: 'Yes'
         }).then((result) => {
             if (result.isConfirmed) {
-                fetch(`http://localhost:5000/users/${user._id}`, {
+                fetch(`http://localhost:5000/users/admin/${user._id}`, {
                     method: 'PATCH'
                 })
                     .then(res => res.json())
