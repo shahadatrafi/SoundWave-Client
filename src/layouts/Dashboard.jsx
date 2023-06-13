@@ -1,12 +1,14 @@
 import { FaArrowLeft, FaCalendarPlus, FaCheckSquare, FaClipboardList, FaShoppingCart, FaUsers } from "react-icons/fa";
 import { NavLink, Outlet } from "react-router-dom";
 import useAdmin from "../hooks/useAdmin";
+import useInstructor from "../hooks/useInstructor";
 
 
 const Dashboard = () => {
 
 
-    const isInstructor = true;
+    // const isInstructor = true;
+    const [isInstructor] = useInstructor();
     console.log(isInstructor)
     const [isAdmin] = useAdmin();
     console.log(isAdmin)
@@ -40,7 +42,7 @@ const Dashboard = () => {
                         </>
                         :
                         <>
-                            {isInstructor ?
+                            {isInstructor?.instructor ?
                                 <>
                                     <li>
                                         <NavLink className='my-1 text-cyan-300 hover:text-cyan-500' to='/dashboard/addclass'>
