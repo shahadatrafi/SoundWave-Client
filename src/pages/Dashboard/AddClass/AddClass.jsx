@@ -7,8 +7,29 @@ import SectionTitle from "../../../components/SectionTitle";
 const AddClass = () => {
 
     const { user } = useContext(AuthContext);
+    const img_token = import.meta.env.VITE_IMAGE_TOKEN;
+    const img_hosting_url = `https://api.imgbb.com/1/upload?key=${img_token}`
     const { register, handleSubmit } = useForm();
-    const onSubmit = data => console.log(data);
+    const onSubmit = data => {
+
+        const fromData = new FormData();
+        fromData.append('image', data.image[0])
+
+        fetch(img_hosting_url, {
+            method: 'POST',
+            body: fromData
+        })
+            .then(res => res.json())
+            .then(imgRes => {
+                if (imgRes.success) {
+                    const imgUrl = imgRes.data.display_url;
+                    const { name, instructorEmail, instructorName, price, availableSeats } = data;
+                    const newClass = { name, image: imgUrl, instructorEmail, instructorName, price: parseFloat(price), availableSeats, status: 'pending' }
+                    console.log(newClass);
+            }
+            })
+        
+    };
 
     return (
         <div className="w-full max-w-2xl">
