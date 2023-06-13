@@ -2,14 +2,16 @@ import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../../../Providers/AuthProvider/AuthProvider";
 import SectionTitle from "../../../components/SectionTitle";
+import Swal from "sweetalert2";
 
 
 const AddClass = () => {
 
     const { user } = useContext(AuthContext);
+    const token = localStorage.getItem('access-token');
     const img_token = import.meta.env.VITE_IMAGE_TOKEN;
     const img_hosting_url = `https://api.imgbb.com/1/upload?key=${img_token}`
-    const { register, handleSubmit } = useForm();
+    const { register, handleSubmit, reset } = useForm();
     const onSubmit = data => {
 
         const fromData = new FormData();
@@ -26,9 +28,40 @@ const AddClass = () => {
                     const { name, instructorEmail, instructorName, price, availableSeats } = data;
                     const newClass = { name, image: imgUrl, instructorEmail, instructorName, price: parseFloat(price), availableSeats, status: 'pending' }
                     console.log(newClass);
-            }
+                    fetch(`http://localhost:5000/classes`, {
+                        method: 'POST',
+                        headers: {
+                            'content-type': "application/json",
+                            authorization: `bearer ${token}`
+                        },
+                        body: JSON.stringify(newClass)
+                    })
+                        .then(res => res.json())
+                        .then(data => {
+                            console.log(data);
+                            if (data.insertedId) {
+                                reset();
+                                const Toast = Swal.mixin({
+                                    toast: true,
+                                    position: 'top-end',
+                                    showConfirmButton: false,
+                                    timer: 3000,
+                                    timerProgressBar: true,
+                                    didOpen: (toast) => {
+                                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                    }
+                                })
+
+                                Toast.fire({
+                                    icon: 'success',
+                                    title: 'Class added successfully. It will be publish after review'
+                                })
+                            }
+                        })
+                }
             })
-        
+
     };
 
     return (
