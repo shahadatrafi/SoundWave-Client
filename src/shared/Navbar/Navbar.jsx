@@ -4,8 +4,13 @@ import { useContext } from "react";
 import { AuthContext } from "../../Providers/AuthProvider/AuthProvider";
 import { FaShoppingCart } from "react-icons/fa";
 import useCart from "../../hooks/useCart";
+import useAdmin from "../../hooks/useAdmin";
+import useInstructor from "../../hooks/useInstructor";
 
 const Navbar = () => {
+
+    const [isAdmin] = useAdmin();
+    const [isInstructor] = useInstructor();
 
     const { user, logout } = useContext(AuthContext);
     const [cart] = useCart();
@@ -47,13 +52,14 @@ const Navbar = () => {
             <div className="navbar-end">
                 {user ?
                     <>
-                        <div className="indicator mr-4">
+                        { isAdmin?.admin || isInstructor?.instructor ? <></> :
+                            <div className="indicator mr-4">
                             <Link to='/dashboard/mycart'>
                                 <span className="indicator-item font-semibold badge badge-info">{cart?.length || 0}</span>
                                 <FaShoppingCart className="text-2xl"></FaShoppingCart>
                             </Link>
-                        </div>
-                        .
+                            </div>
+                        }
 
                         <div className="w-12 mask mask-squircle mr-5">
                             {user.photoURL && <img src={user.photoURL} />}

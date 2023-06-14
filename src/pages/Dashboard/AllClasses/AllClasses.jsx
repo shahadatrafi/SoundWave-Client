@@ -87,6 +87,9 @@ const AllClasses = () => {
             }
         })
     }
+    const handleFeedback = c => {
+        console.log('clicked', c);
+    }
 
     return (
         <div className="w-full">
