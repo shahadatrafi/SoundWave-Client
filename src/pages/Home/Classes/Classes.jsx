@@ -2,6 +2,8 @@ import SectionTitle from "../../../components/SectionTitle";
 import ClassCard from "./ClassCard";
 import useClasses from "../../../hooks/useClasses";
 
+
+
 const Classes = () => {
 
     const [classes] = useClasses();
