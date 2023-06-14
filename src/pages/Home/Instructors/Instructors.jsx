@@ -18,7 +18,7 @@ const Instructors = () => {
                 heading={'Our Popular Instructors'}
                 subheading={"Meet Our Acclaimed Instructors"}
             ></SectionTitle>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-3 mx-28 md:mx-0 gap-8">
                     {
                         instructors.map(instructor => <InstructorCard
                             key={instructor._id}

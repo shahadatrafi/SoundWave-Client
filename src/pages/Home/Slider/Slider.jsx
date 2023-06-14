@@ -17,7 +17,7 @@ const Slider = () => {
                 }}
                 
                 modules={[Pagination]}
-                className="mySwiper h-[500px]"
+                className="mySwiper h-[250px] md:h-[500px]"
             >
                 <SwiperSlide style={{
                     backgroundImage: `linear-gradient(275deg,rgba(0, 240, 242, .4), rgba(0, 0, 0, 0.7)), url(${banner1})`,
@@ -25,9 +25,9 @@ const Slider = () => {
                     backgroundSize: 'cover',
                     
                     }}>
-                    <div className="container mx-auto flex flex-col justify-center items-start h-[500px] ">
-                        <h2 className="text-cyan-400 opacity-90 font-bold capitalize text-5xl">Learn Keyboard With us</h2>
-                        <p className="text-white opacity-80 text-xl my-6 w-[550px] "> A versatile musical instrument with keys that produce sounds electronically or through MIDI, used in various genres and as a composing tool.</p>
+                    <div className="container mx-auto flex flex-col justify-center ml-5 md:ml-0 items-start h-[250px] md:h-[500px] ">
+                        <h2 className="text-cyan-400 opacity-90 font-bold capitalize text-2xl md:text-5xl">Learn Keyboard With us</h2>
+                        <p className="text-white opacity-80 md:text-xl my-6 w-[300px] md:w-[550px] "> A versatile musical instrument with keys that produce sounds electronically or through MIDI, used in various genres and as a composing tool.</p>
                         <button className="btn bg-cyan-400 text-black capitalize text-xl border-cyan-400 hover:bg-cyan-500 hover:border-cyan-500 mt-2 duration-300">Enroll Now !</button>
                     </div>
                 </SwiperSlide>

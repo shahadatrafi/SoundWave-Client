@@ -13,7 +13,7 @@ const Classes = () => {
                 heading={"our popular Classes"}
                 subheading={"In-Demand Course Offerings"}
             ></SectionTitle>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-3 mx-20 md:mx-0 gap-8">
                 {
                     approvedClasses.map(classItem => <ClassCard
                         key={classItem._id}
