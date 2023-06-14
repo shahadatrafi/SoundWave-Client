@@ -1,5 +1,7 @@
 # Sound Wave Music Summer Camp School Website
 
+[Live Link](https://soundwave-e8dde.web.app/)
+
 This is the official website for Sound Wave Music Summer Camp School, where students can explore their musical talents and learn from talented instructors. The website provides a user-friendly interface and offers various features for different user roles, including admin, instructor, and student. It is designed to be visually appealing, with attention to color contrast, alignment, and overall aesthetic appeal.
 
 ## Key Features
