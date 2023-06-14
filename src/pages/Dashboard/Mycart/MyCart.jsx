@@ -78,7 +78,7 @@ const MyCart = () => {
                                 </td>
                                 <td> $ {selectedClass.price}</td>
                                 <th>
-                                <Link to='/dashboard/payment'><button className="btn btn-outline btn-info btn-block btn-sm">Pay</button></Link>
+                                <Link to={`/dashboard/payment/${selectedClass._id}`}><button  className="btn btn-outline btn-info btn-block btn-sm">Pay</button></Link>
                                 </th>
                                 <th>
                                 <button onClick={()=>handleDelete(selectedClass._id)} className="btn btn-outline btn-info btn-block btn-sm">Delete</button>
