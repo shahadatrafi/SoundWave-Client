@@ -18,11 +18,13 @@ import AdminRoute from "./AdminRoute";
 import AddClass from "../pages/Dashboard/AddClass/AddClass";
 import AddedClasses from "../pages/Dashboard/MyClasses/AddedClasses";
 import Payment from "../pages/Dashboard/Payment/Payment";
+import ErrorPage from "../pages/ErrorPage/ErrorPage";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Main></Main>,
+    errorElement: <ErrorPage></ErrorPage>,
     children: [
       {
         path: '/',
@@ -49,6 +51,7 @@ const router = createBrowserRouter([
   {
     path: 'dashboard',
     element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
+    errorElement: <ErrorPage></ErrorPage>,
     children: [
       {
         path: 'mycart',
