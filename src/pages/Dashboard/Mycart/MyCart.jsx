@@ -1,6 +1,7 @@
 import Swal from "sweetalert2";
 import SectionTitle from "../../../components/SectionTitle";
 import useCart from "../../../hooks/useCart";
+import { Link } from "react-router-dom";
 
 
 const MyCart = () => {
@@ -77,7 +78,7 @@ const MyCart = () => {
                                 </td>
                                 <td> $ {selectedClass.price}</td>
                                 <th>
-                                <button className="btn btn-outline btn-info btn-block btn-sm">Pay</button>
+                                <Link to='/dashboard/payment'><button className="btn btn-outline btn-info btn-block btn-sm">Pay</button></Link>
                                 </th>
                                 <th>
                                 <button onClick={()=>handleDelete(selectedClass._id)} className="btn btn-outline btn-info btn-block btn-sm">Delete</button>
