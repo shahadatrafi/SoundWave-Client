@@ -3,6 +3,8 @@ import {useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Providers/AuthProvider/AuthProvider";
 import Swal from "sweetalert2";
 import useCart from "../../hooks/useCart";
+import useAdmin from "../../hooks/useAdmin";
+import useInstructor from "../../hooks/useInstructor";
 
 
 const ApprovedClassCard = ({ ApprovedClass }) => {
@@ -11,6 +13,8 @@ const ApprovedClassCard = ({ ApprovedClass }) => {
     const navigate = useNavigate();
     const location = useLocation();
     const [, refetch] = useCart();
+    const [isAdmin] = useAdmin();
+    const [isInstructor] = useInstructor();
 
     const { image, name, instructorName, availableSeats, students, price, _id } = ApprovedClass;
 
@@ -64,7 +68,7 @@ const ApprovedClassCard = ({ ApprovedClass }) => {
                 <div className="flex w-full items-center justify-between">
                 <p><span className="font-semibold text-white opacity-80">Available Sets:</span> <span className="text-cyan-400 ">{setLeft}</span></p>
                 </div>
-                <button onClick={()=> handleSelectClass(ApprovedClass)} disabled={setLeft === 0 ? true : false} className="btn btn-outline btn-info btn-block mt-3">Select Course</button>
+                <button onClick={()=> handleSelectClass(ApprovedClass)} disabled={setLeft === 0 || isAdmin?.admin || isInstructor?.instructor ? true : false} className="btn btn-outline btn-info btn-block mt-3">Select Course</button>
             </div>
         </div>
     );
