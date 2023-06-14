@@ -24,7 +24,7 @@ const Login = () => {
                 navigate(from, {replace: true})
             })
             .catch(err => {
-            console.err(err.message)
+            console.error(err.message)
         })
     }
 

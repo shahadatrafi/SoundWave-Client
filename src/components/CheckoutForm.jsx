@@ -1,11 +1,13 @@
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { AuthContext } from "../Providers/AuthProvider/AuthProvider";
 
 
 const CheckoutForm = ({price}) => {
 
     const stripe = useStripe();
     const elements = useElements();
+    const { user } = useContext(AuthContext);
     const token = localStorage.getItem('access-token');
     const [cardError, setCardError] = useState('');
     const [clientSecret, setClientSecret] = useState('');
@@ -24,7 +26,7 @@ const CheckoutForm = ({price}) => {
                 console.log(data.clientSecret)
                 setClientSecret(data.clientSecret)
         })
-    },[price, token])
+    },[])
 
     const handleSubmit = async (event) => {
 
@@ -54,7 +56,24 @@ const CheckoutForm = ({price}) => {
             setCardError('');
         }
 
+        const { paymentIntent, error: confirmError } = await stripe.confirmCardPayment(
+            clientSecret,
+            {
+                payment_method: {
+                    card: card,
+                    billing_details: {
+                        email: user?.email || 'unknown',
+                        name: user?.displayName || 'anonymous'
+                    },
+                },
+            },
+        );
+
+        if (confirmError) {
+            console.log(confirmError);
+        }
         
+        console.log('paymentIntent is', paymentIntent)
 
     }
 
