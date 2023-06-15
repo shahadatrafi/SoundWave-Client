@@ -28,7 +28,7 @@ const AddClass = () => {
                     const { name, instructorEmail, instructorName, price, availableSeats } = data;
                     const newClass = { name, image: imgUrl, instructorEmail, instructorName, price: parseFloat(price), availableSeats: parseFloat(availableSeats), students: 0, status: 'pending' }
                     console.log(newClass);
-                    fetch(`http://localhost:5000/classes`, {
+                    fetch(`https://sound-wave-server.vercel.app/classes`, {
                         method: 'POST',
                         headers: {
                             'content-type': "application/json",

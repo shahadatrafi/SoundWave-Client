@@ -19,7 +19,7 @@ const AllClasses = () => {
             confirmButtonText: 'Yes'
         }).then((result) => {
             if (result.isConfirmed) {
-                fetch(`http://localhost:5000/classes/approved/${c._id}`, {
+                fetch(`https://sound-wave-server.vercel.app/classes/approved/${c._id}`, {
                     method: 'PUT'
                 })
                     .then(res => res.json())
@@ -59,7 +59,7 @@ const AllClasses = () => {
             confirmButtonText: 'Yes'
         }).then((result) => {
             if (result.isConfirmed) {
-                fetch(`http://localhost:5000/classes/denied/${c._id}`, {
+                fetch(`https://sound-wave-server.vercel.app/classes/denied/${c._id}`, {
                     method: 'PUT'
                 })
                     .then(res => res.json())
@@ -112,6 +112,8 @@ const AllClasses = () => {
                             <th>price</th>
                             <th>Status</th>
                             <th>Update Status</th>
+                            <th>Feedback</th>
+
 
                         </tr>
                     </thead>
@@ -156,7 +158,7 @@ const AllClasses = () => {
                                 </th>
                                 <th>
                                     <div className="flex gap-4 justify-center">
-                                        <button onClick={() => handleFeedback(c)} className="btn btn-outline btn-info btn-sm text-xl "><FaCheck></FaCheck></button>
+                                        <button onClick={() => handleFeedback(c)} className="btn btn-outline btn-info btn-sm text-xl ">Feedback</button>
                                     </div>
                                 </th>
                             </tr>)

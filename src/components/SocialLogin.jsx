@@ -21,7 +21,7 @@ const SocialLogin = () => {
 
                 const savedUser = { name: loggedUser.displayName, email: loggedUser.email, image: loggedUser.photoURL, role: 'student' }
 
-                fetch(`http://localhost:5000/users`, {
+                fetch(`https://sound-wave-server.vercel.app/users`, {
                     method: 'POST',
                     headers: {
                         'content-type': 'application/json'

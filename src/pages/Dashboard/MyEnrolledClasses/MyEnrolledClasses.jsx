@@ -11,7 +11,7 @@ const MyEnrolledClasses = () => {
     const MyEnrolledClasses = enrolledClasses.filter(c => c.email === user?.email)
 
     useEffect(() => {
-        fetch('http://localhost:5000/payments')
+        fetch('https://sound-wave-server.vercel.app/payments')
             .then(res => res.json())
             .then(data => {
                 setEnrolledClasses(data);

@@ -17,7 +17,7 @@ const CheckoutForm = ({ price, enrolledClassItem
 
     useEffect(() => {
         if (price > 0) {
-            fetch('http://localhost:5000/create-payment-intent', {
+            fetch('https://sound-wave-server.vercel.app/create-payment-intent', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',
@@ -92,7 +92,7 @@ const CheckoutForm = ({ price, enrolledClassItem
                 cartClassId: enrolledClassItem.classId,
                 price,
             }
-            fetch('http://localhost:5000/payments', {
+            fetch('https://sound-wave-server.vercel.app/payments', {
                 method: 'POST',
                 headers: {
                     'content-type':'application/json'

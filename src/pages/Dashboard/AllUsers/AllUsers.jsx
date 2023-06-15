@@ -8,7 +8,7 @@ const AllUsers = () => {
     const token = localStorage.getItem('access-token');
 
     const { data: users = [], refetch } = useQuery(['users'], async () => {
-        const res = await fetch('http://localhost:5000/users', {
+        const res = await fetch('https://sound-wave-server.vercel.app/users', {
             headers: {
                 authorization: `bearer ${token}`
             }
@@ -28,7 +28,7 @@ const AllUsers = () => {
             confirmButtonText: 'Yes'
         }).then((result) => {
             if (result.isConfirmed) {
-                fetch(`http://localhost:5000/users/instructors/${user._id}`, {
+                fetch(`https://sound-wave-server.vercel.app/users/instructors/${user._id}`, {
                     method: 'PUT'
                 })
                     .then(res => res.json())
@@ -52,7 +52,7 @@ const AllUsers = () => {
                             })
                             refetch();
                             const newInstructor = { name: user.name, image: user.image, email: user.email, role: 'instructor' }
-                            fetch(`http://localhost:5000/instructors`, {
+                            fetch(`https://sound-wave-server.vercel.app/instructors`, {
                                 method: 'POST',
                                 headers: {
                                     'content-type': 'application/json'
@@ -85,7 +85,7 @@ const AllUsers = () => {
             confirmButtonText: 'Yes'
         }).then((result) => {
             if (result.isConfirmed) {
-                fetch(`http://localhost:5000/users/admin/${user._id}`, {
+                fetch(`https://sound-wave-server.vercel.app/users/admin/${user._id}`, {
                     method: 'PATCH'
                 })
                     .then(res => res.json())

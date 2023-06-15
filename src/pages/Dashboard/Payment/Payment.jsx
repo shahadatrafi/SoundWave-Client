@@ -15,7 +15,7 @@ const Payment = () => {
     console.log(id);
 
     useEffect(() => {
-        fetch(`http://localhost:5000/carts/${id}`)
+        fetch(`https://sound-wave-server.vercel.app/carts/${id}`)
             .then(res => res.json())
             .then(data => {
                 setEnrolledClassItem(data)
