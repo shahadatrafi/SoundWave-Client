@@ -63,6 +63,7 @@ const Dashboard = () => {
                                     </li>
 
                                     <li><NavLink className='my-1 text-cyan-300 hover:text-cyan-500' to='/dashboard/enrolledclass'><FaCheckSquare className="text-xl"></FaCheckSquare> Enrolled Classes</NavLink></li>
+                                    <li><NavLink className='my-1 text-cyan-300 hover:text-cyan-500' to='/dashboard/paymenthistory'><FaClipboardList className="text-xl"></FaClipboardList> Payment History</NavLink></li>
                                 </>}
                         </>}
 
