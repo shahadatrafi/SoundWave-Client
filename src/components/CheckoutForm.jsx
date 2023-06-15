@@ -89,6 +89,7 @@ const CheckoutForm = ({ price, enrolledClassItem
                 TransactionId: paymentIntent.id,
                 className: enrolledClassItem.name,
                 classId: enrolledClassItem._id,
+                cartClassId: enrolledClassItem.classId,
                 price,
             }
             fetch('http://localhost:5000/payments', {
