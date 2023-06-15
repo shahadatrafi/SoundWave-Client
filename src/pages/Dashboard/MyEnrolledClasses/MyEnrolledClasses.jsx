@@ -21,8 +21,8 @@ const MyEnrolledClasses = () => {
     return (
         <div>
             <SectionTitle
-                heading={"Your Selected Classes"}
-                subheading={"Review and Proceed with Your Selected Classes"}
+                heading={"Your Enrolled Classes"}
+                subheading={"Review with Your Enrolled Classes"}
             ></SectionTitle>
             <div className="overflow-x-auto">
                 <table className="table">
