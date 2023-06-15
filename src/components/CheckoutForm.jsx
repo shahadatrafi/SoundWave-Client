@@ -3,7 +3,8 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../Providers/AuthProvider/AuthProvider";
 
 
-const CheckoutForm = ({price}) => {
+const CheckoutForm = ({ price, enrolledClassItem
+}) => {
 
     const stripe = useStripe();
     const elements = useElements();
@@ -82,6 +83,28 @@ const CheckoutForm = ({price}) => {
         setProcessing(false);
         if (paymentIntent.status === 'succeeded') {
             setTransactionId(paymentIntent.id);
+            // information of enrolled classes
+            const enrolledClass = {
+                email: user?.email,
+                TransactionId: paymentIntent.id,
+                className: enrolledClassItem.name,
+                classId: enrolledClassItem._id,
+                price,
+            }
+            fetch('http://localhost:5000/payments', {
+                method: 'POST',
+                headers: {
+                    'content-type':'application/json'
+                },
+                body: JSON.stringify(enrolledClass)
+            })
+                .then(res => res.json())
+                .then(data => {
+                    console.log(data);
+                    if (data.insertedId) {
+                    // 
+                }
+            })
         }
         
     }

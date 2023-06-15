@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 const Payment = () => {
 
     const [price, setPrice] = useState('');
+    const [enrolledClassItem, setEnrolledClassItem] = useState([]);
 
     const { id } = useParams();
     console.log(id);
@@ -17,6 +18,7 @@ const Payment = () => {
         fetch(`http://localhost:5000/carts/${id}`)
             .then(res => res.json())
             .then(data => {
+                setEnrolledClassItem(data)
                 setPrice(parseFloat(data.price).toFixed(2))   
         })
     }, [id])
@@ -32,7 +34,7 @@ const Payment = () => {
         <div className="w-full max-w-xl">
             <SectionTitle heading={'Payment'} subheading={'Enroll into the class now'}></SectionTitle>
             <Elements stripe={stripePromise}>
-                <CheckoutForm price={price} />
+                <CheckoutForm price={price} enrolledClassItem={ enrolledClassItem} />
             </Elements>
         </div>
     );
