@@ -25,7 +25,7 @@ const Slider = () => {
                     backgroundSize: 'cover',
                     
                     }}>
-                    <div className="container mx-auto flex flex-col justify-center ml-10 items-start h-[250px] md:h-[500px] ">
+                    <div className="container mx-auto flex flex-col justify-center items-start h-[250px] md:h-[500px] ">
                         <h2 className="text-cyan-400 opacity-90 font-bold capitalize text-2xl md:text-5xl">Learn Keyboard With us</h2>
                         <p className="text-white opacity-80 md:text-xl my-6 w-[300px] md:w-[550px] "> A versatile musical instrument with keys that produce sounds electronically or through MIDI, used in various genres and as a composing tool.</p>
                         <button className="btn bg-cyan-400 text-black capitalize text-xl border-cyan-400 hover:bg-cyan-500 hover:border-cyan-500 mt-2 duration-300">Enroll Now !</button>
