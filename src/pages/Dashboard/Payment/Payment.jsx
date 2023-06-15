@@ -10,7 +10,7 @@ const Payment = () => {
 
     const [price, setPrice] = useState('');
 
-    const {id} = useParams();
+    const { id } = useParams();
     console.log(id);
 
     useEffect(() => {
@@ -21,7 +21,7 @@ const Payment = () => {
         })
     }, [id])
 
-    
+    console.log(price);
     
 
 

@@ -11,9 +11,12 @@ const CheckoutForm = ({price}) => {
     const token = localStorage.getItem('access-token');
     const [cardError, setCardError] = useState('');
     const [clientSecret, setClientSecret] = useState('');
+    const [processing, setProcessing] = useState(false);
+    const [transactionId, setTransactionId] = useState('');
 
     useEffect(() => {
-        fetch('http://localhost:5000/create-payment-intent', {
+        if (price > 0) {
+            fetch('http://localhost:5000/create-payment-intent', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',
@@ -26,7 +29,8 @@ const CheckoutForm = ({price}) => {
                 console.log(data.clientSecret)
                 setClientSecret(data.clientSecret)
         })
-    },[])
+        }
+    },[price, token])
 
     const handleSubmit = async (event) => {
 
@@ -56,6 +60,8 @@ const CheckoutForm = ({price}) => {
             setCardError('');
         }
 
+        setProcessing(true);
+
         const { paymentIntent, error: confirmError } = await stripe.confirmCardPayment(clientSecret,
             {
                 payment_method: {
@@ -73,7 +79,11 @@ const CheckoutForm = ({price}) => {
         }
         
         console.log('paymentIntent is', paymentIntent)
-
+        setProcessing(false);
+        if (paymentIntent.status === 'succeeded') {
+            setTransactionId(paymentIntent.id);
+        }
+        
     }
 
     return (
@@ -96,12 +106,13 @@ const CheckoutForm = ({price}) => {
                     }}
                 />
                 <div className="text-center">
-                <button className="btn btn-info btn-outline  mt-8 btn-wide " type="submit" disabled={!stripe || !clientSecret}>
+                <button className="btn btn-info btn-outline  mt-8 btn-wide " type="submit" disabled={!stripe || !clientSecret || processing}>
                     Pay
                 </button>
                 </div>
             </form>
             {cardError && <p className="text-red-600">{cardError}</p>}
+            {transactionId && <p className="text-green-500 mt-8">Transaction successful with transactionId: {transactionId}</p>}
 
         </div>
     );
